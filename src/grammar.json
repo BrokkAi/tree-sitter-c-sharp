@@ -2697,8 +2697,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "this"
+          "type": "SYMBOL",
+          "name": "this"
         },
         {
           "type": "FIELD",
@@ -3010,8 +3010,8 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": "this"
+                    "type": "SYMBOL",
+                    "name": "this"
                   },
                   {
                     "type": "STRING",
@@ -3150,8 +3150,8 @@
               "value": "base"
             },
             {
-              "type": "STRING",
-              "value": "this"
+              "type": "SYMBOL",
+              "name": "this"
             }
           ]
         },
@@ -6979,8 +6979,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "this"
+          "type": "SYMBOL",
+          "name": "this"
         },
         {
           "type": "SYMBOL",
@@ -10842,6 +10842,10 @@
           "value": "yield"
         }
       ]
+    },
+    "this": {
+      "type": "STRING",
+      "value": "this"
     },
     "preproc_if": {
       "type": "PREC",

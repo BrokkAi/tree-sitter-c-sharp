@@ -175,7 +175,7 @@
       },
       {
         "type": "this",
-        "named": false
+        "named": true
       },
       {
         "type": "tuple_expression",
@@ -1987,11 +1987,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "this",
           "named": true
         }
       ]
@@ -3251,7 +3255,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "attribute_list",
@@ -3267,6 +3271,10 @@
         },
         {
           "type": "preproc_if_in_attribute_list",
+          "named": true
+        },
+        {
+          "type": "this",
           "named": true
         }
       ]
@@ -7309,7 +7317,7 @@
   },
   {
     "type": "this",
-    "named": false
+    "named": true
   },
   {
     "type": "throw",
