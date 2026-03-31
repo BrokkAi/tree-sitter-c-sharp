@@ -213,7 +213,7 @@
       },
       {
         "type": "base",
-        "named": false
+        "named": true
       },
       {
         "type": "binary_expression",
@@ -1992,6 +1992,10 @@
       "types": [
         {
           "type": "argument_list",
+          "named": true
+        },
+        {
+          "type": "base",
           "named": true
         },
         {
@@ -6908,7 +6912,7 @@
   },
   {
     "type": "base",
-    "named": false
+    "named": true
   },
   {
     "type": "break",
