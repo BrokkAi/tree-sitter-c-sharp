@@ -1217,6 +1217,7 @@ export default grammar({
           alias('async', $.modifier),
           repeat($.modifier),
           field('type', $.type),
+          optional($.explicit_interface_specifier),
           field('name', $.identifier),
           field('type_parameters', optional($.type_parameter_list)),
           field('parameters', $.parameter_list),
@@ -1224,6 +1225,7 @@ export default grammar({
         seq(
           repeat($.modifier),
           field('type', $.type),
+          optional($.explicit_interface_specifier),
           field('name', $.identifier),
           field('type_parameters', optional($.type_parameter_list)),
           field('parameters', $.parameter_list),
