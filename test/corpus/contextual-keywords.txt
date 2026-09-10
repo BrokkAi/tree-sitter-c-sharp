@@ -645,3 +645,41 @@ class C {
                 (invocation_expression
                   function: (identifier)
                   arguments: (argument_list))))))))))
+
+================================================================================
+Static local function after invocation
+================================================================================
+
+class C {
+    void M() {
+        Test(true);
+        static void Test(bool value) { }
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(compilation_unit
+  (class_declaration
+    (identifier)
+    (declaration_list
+      (method_declaration
+        (predefined_type)
+        (identifier)
+        (parameter_list)
+        (block
+          (expression_statement
+            (invocation_expression
+              (identifier)
+              (argument_list
+                (argument
+                  (boolean_literal)))))
+          (local_function_statement
+            (modifier)
+            (predefined_type)
+            (identifier)
+            (parameter_list
+              (parameter
+                (predefined_type)
+                (identifier)))
+            (block)))))))

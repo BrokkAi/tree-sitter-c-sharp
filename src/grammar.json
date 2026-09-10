@@ -5708,8 +5708,17 @@
                   {
                     "type": "ALIAS",
                     "content": {
-                      "type": "STRING",
-                      "value": "async"
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "async"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "static"
+                        }
+                      ]
                     },
                     "named": true,
                     "value": "modifier"

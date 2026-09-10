@@ -1214,7 +1214,7 @@ export default grammar({
       repeat($._attribute_list),
       choice(
         prec(2, seq(
-          alias('async', $.modifier),
+          alias(choice('async', 'static'), $.modifier),
           repeat($.modifier),
           field('type', $.type),
           optional($.explicit_interface_specifier),
