@@ -1,8 +1,6 @@
 # Brokk's C# Grammar for Tree-sitter
 
 [![CI][ci]](https://github.com/BrokkAi/tree-sitter-c-sharp/actions/workflows/ci.yml)
-[![discord][discord]](https://discord.gg/w7nTvsVJhm)
-[![matrix][matrix]](https://matrix.to/#/#tree-sitter-chat:matrix.org)
 [![crates][crates]](https://crates.io/crates/brokk-tree-sitter-c-sharp)
 [![docs.rs][docs]](https://docs.rs/brokk-tree-sitter-c-sharp)
 
@@ -54,7 +52,5 @@ Comprehensively supports C# 1 through 14.0 with the following exceptions:
 - [SharpLab](https://sharplab.io) (web-based syntax tree playground based on Roslyn)
 
 [ci]: https://img.shields.io/github/actions/workflow/status/BrokkAi/tree-sitter-c-sharp/ci.yml?logo=github&label=CI
-[discord]: https://img.shields.io/discord/1063097320771698699?logo=discord&label=discord
-[matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
 [crates]: https://img.shields.io/crates/v/brokk-tree-sitter-c-sharp?logo=rust
 [docs]: https://img.shields.io/docsrs/brokk-tree-sitter-c-sharp?logo=docs.rs
