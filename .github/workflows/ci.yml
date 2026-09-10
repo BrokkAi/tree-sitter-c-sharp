@@ -43,8 +43,15 @@ jobs:
           git clone https://github.com/nunit/nunit examples/nunit --single-branch --depth=1 --filter=blob:none
           git clone https://github.com/OrchardCMS/orchard examples/orchard --single-branch --depth=1 --filter=blob:none
           git clone https://github.com/microsoft/PowerToys examples/PowerToys --single-branch --depth=1 --filter=blob:none
-      - name: Run tests
-        uses: tree-sitter/parser-test-action@05f6ce7c7e54603c45cd87ed926725dc870bcc63 # v3
+      - name: Verify generated parser
+        shell: bash
+        run: |-
+          npx tree-sitter generate
+          git diff --exit-code -- src
+      - name: Run parser tests
+        run: npx tree-sitter test
+      - name: Run Rust tests
+        run: cargo test --locked
       - name: Parse examples
         uses: tree-sitter/parse-action@f44ffa94f802024f27e821a72e6f2f3efc5dd521 # v4
         id: test
