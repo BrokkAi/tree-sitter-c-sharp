@@ -38,11 +38,21 @@ jobs:
           npm ci --legacy-peer-deps --ignore-scripts
           npm rebuild tree-sitter-cli
       - name: Set up examples
+        shell: bash
         run: |-
-          git clone https://github.com/JamesNK/Newtonsoft.Json examples/Newtonsoft.Json --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/nunit/nunit examples/nunit --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/OrchardCMS/orchard examples/orchard --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/microsoft/PowerToys examples/PowerToys --single-branch --depth=1 --filter=blob:none
+          checkout_example() {
+            repository=$1
+            destination=$2
+            revision=$3
+            git init "$destination"
+            git -C "$destination" remote add origin "https://github.com/$repository"
+            git -C "$destination" fetch --depth=1 --filter=blob:none origin "$revision"
+            git -C "$destination" checkout --detach FETCH_HEAD
+          }
+          checkout_example JamesNK/Newtonsoft.Json examples/Newtonsoft.Json 4f73e74372445108d2c1bda37b36e6f5e43402e0
+          checkout_example nunit/nunit examples/nunit 4c7f0eac462327a6b4084e5f0baa3ab32494185c
+          checkout_example OrchardCMS/orchard examples/orchard a619b708c8bdd354ed7648c992fce1a0c482565e
+          checkout_example microsoft/PowerToys examples/PowerToys ff87dce4a411e82312089cd6a360b910c8211c4b
       - name: Verify generated parser
         shell: bash
         run: |-
