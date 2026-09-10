@@ -4,8 +4,7 @@
 [![discord][discord]](https://discord.gg/w7nTvsVJhm)
 [![matrix][matrix]](https://matrix.to/#/#tree-sitter-chat:matrix.org)
 [![crates][crates]](https://crates.io/crates/brokk-tree-sitter-c-sharp)
-[![npm][npm]](https://www.npmjs.com/package/tree-sitter-c-sharp)
-[![pypi][pypi]](https://pypi.org/project/tree-sitter-c-sharp)
+[![docs.rs][docs]](https://docs.rs/brokk-tree-sitter-c-sharp)
 
 This is the **Brokk-owned and independently maintained fork** of
 [`tree-sitter/tree-sitter-c-sharp`](https://github.com/tree-sitter/tree-sitter-c-sharp),
@@ -15,6 +14,21 @@ the Rust package as
 [`brokk-tree-sitter-c-sharp`](https://crates.io/crates/brokk-tree-sitter-c-sharp).
 It may intentionally diverge from upstream to support correctness and language
 coverage required by Brokk.
+
+## Installation
+
+Add the Brokk-maintained Rust crate to your project:
+
+```sh
+cargo add brokk-tree-sitter-c-sharp@=0.23.5
+```
+
+Or add it directly to `Cargo.toml`:
+
+```toml
+[dependencies]
+brokk-tree-sitter-c-sharp = "=0.23.5"
+```
 
 The grammar is based upon the Roslyn grammar with changes in order to:
 
@@ -42,6 +56,5 @@ Comprehensively supports C# 1 through 14.0 with the following exceptions:
 [ci]: https://img.shields.io/github/actions/workflow/status/BrokkAi/tree-sitter-c-sharp/ci.yml?logo=github&label=CI
 [discord]: https://img.shields.io/discord/1063097320771698699?logo=discord&label=discord
 [matrix]: https://img.shields.io/matrix/tree-sitter-chat%3Amatrix.org?logo=matrix&label=matrix
-[npm]: https://img.shields.io/npm/v/tree-sitter-c-sharp?logo=npm
 [crates]: https://img.shields.io/crates/v/brokk-tree-sitter-c-sharp?logo=rust
-[pypi]: https://img.shields.io/pypi/v/tree-sitter-c-sharp?logo=pypi&logoColor=ffd242
+[docs]: https://img.shields.io/docsrs/brokk-tree-sitter-c-sharp?logo=docs.rs
