@@ -18,14 +18,14 @@ coverage required by Brokk.
 Add the Brokk-maintained Rust crate to your project:
 
 ```sh
-cargo add brokk-tree-sitter-c-sharp@=0.23.5
+cargo add brokk-tree-sitter-c-sharp@=0.23.6
 ```
 
 Or add it directly to `Cargo.toml`:
 
 ```toml
 [dependencies]
-brokk-tree-sitter-c-sharp = "=0.23.5"
+brokk-tree-sitter-c-sharp = "=0.23.6"
 ```
 
 The grammar is based upon the Roslyn grammar with changes in order to:

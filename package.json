@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-c-sharp",
-  "version": "0.23.5",
+  "version": "0.23.6",
   "description": "Brokk-maintained Tree-sitter grammar for C#",
   "type": "module",
   "repository": "https://github.com/BrokkAi/tree-sitter-c-sharp",
