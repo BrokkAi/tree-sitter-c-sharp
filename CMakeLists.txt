@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-c-sharp
         VERSION "0.23.5"
         DESCRIPTION "C# grammar for tree-sitter"
-        HOMEPAGE_URL "https://github.com/tree-sitter/tree-sitter-c-sharp"
+        HOMEPAGE_URL "https://github.com/BrokkAi/tree-sitter-c-sharp"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

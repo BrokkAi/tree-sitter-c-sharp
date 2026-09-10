@@ -7,7 +7,7 @@
 //! let code = r#"
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
-//! let language = tree_sitter_c_sharp::LANGUAGE;
+//! let language = brokk_tree_sitter_c_sharp::LANGUAGE;
 //! parser
 //!     .set_language(&language.into())
 //!     .expect("Error loading CSharp parser");

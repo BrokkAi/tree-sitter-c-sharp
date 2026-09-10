@@ -1,9 +1,9 @@
 {
   "name": "tree-sitter-c-sharp",
   "version": "0.23.5",
-  "description": "C# grammar for tree-sitter",
+  "description": "Brokk-maintained Tree-sitter grammar for C#",
   "type": "module",
-  "repository": "https://github.com/tree-sitter/tree-sitter-c-sharp",
+  "repository": "https://github.com/BrokkAi/tree-sitter-c-sharp",
   "license": "MIT",
   "author": {
     "name": "Max Brunsfeld",
@@ -11,14 +11,13 @@
   },
   "maintainers": [
     {
-      "name": "Amaan Qureshi",
-      "email": "amaanq12@gmail.com"
-    },
-    {
-      "name": "Damien Guard",
-      "email": "damieng@gmail.com"
+      "name": "Brokk"
     }
   ],
+  "bugs": {
+    "url": "https://github.com/BrokkAi/tree-sitter-c-sharp/issues"
+  },
+  "homepage": "https://github.com/BrokkAi/tree-sitter-c-sharp#readme",
   "main": "bindings/node",
   "types": "bindings/node",
   "keywords": [

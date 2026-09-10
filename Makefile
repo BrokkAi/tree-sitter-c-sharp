@@ -3,7 +3,7 @@ $(error Windows is not supported)
 endif
 
 LANGUAGE_NAME := tree-sitter-c-sharp
-HOMEPAGE_URL := https://github.com/tree-sitter/tree-sitter-c-sharp
+HOMEPAGE_URL := https://github.com/BrokkAi/tree-sitter-c-sharp
 VERSION := 0.23.5
 
 # repository
