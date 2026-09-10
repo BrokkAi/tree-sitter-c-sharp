@@ -41,4 +41,7 @@ parser.lib
 *.tgz
 *.zip
 
+# macOS metadata
+**/.DS_Store
+
 .claude/
