@@ -27,8 +27,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - name: Set up tree-sitter
-        uses: tree-sitter/setup-action/cli@49f8c1f20b60102eae8c033bb7c7f6cd056f6086 # v2
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION}}
+      - name: Install pinned tree-sitter CLI
+        shell: bash
+        run: |-
+          npm ci --legacy-peer-deps --ignore-scripts
+          npm rebuild tree-sitter-cli
       - name: Set up examples
         run: |-
           git clone https://github.com/JamesNK/Newtonsoft.Json examples/Newtonsoft.Json --single-branch --depth=1 --filter=blob:none
