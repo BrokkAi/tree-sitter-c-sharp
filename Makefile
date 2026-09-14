@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-c-sharp
 HOMEPAGE_URL := https://github.com/BrokkAi/tree-sitter-c-sharp
-VERSION := 0.23.6
+VERSION := 0.23.7
 
 # repository
 SRC_DIR := src
