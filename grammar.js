@@ -2166,7 +2166,11 @@ export default grammar({
       'on',
       'orderby',
       'param',
+      // These are modifiers in declaration position, but ordinary names in
+      // expressions. Keep the identifier fallback below the modifier token.
+      prec(-1, 'partial'),
       'property',
+      prec(-1, 'required'),
       'scoped',
       'select',
       'type',
