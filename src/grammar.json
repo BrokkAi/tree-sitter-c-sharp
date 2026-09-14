@@ -10843,8 +10843,24 @@
           "value": "param"
         },
         {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "STRING",
+            "value": "partial"
+          }
+        },
+        {
           "type": "STRING",
           "value": "property"
+        },
+        {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "STRING",
+            "value": "required"
+          }
         },
         {
           "type": "STRING",

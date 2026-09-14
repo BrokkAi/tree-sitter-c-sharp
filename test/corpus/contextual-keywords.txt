@@ -683,3 +683,101 @@ class C {
                 (predefined_type)
                 (identifier)))
             (block)))))))
+
+================================================================================
+Partial and required contextual identifiers in assignments
+================================================================================
+
+partial class PartialType { }
+
+class C {
+    required object Value { get; init; }
+
+    void M() {
+        var partial = Get();
+        partial = partial.Clone();
+        partial.Value = required.Value;
+
+        var required = Get();
+        required = required.Clone();
+        required.Value = partial.Value;
+    }
+
+    void N() { }
+}
+
+--------------------------------------------------------------------------------
+
+(compilation_unit
+  (class_declaration
+    (modifier)
+    (identifier)
+    (declaration_list))
+  (class_declaration
+    (identifier)
+    (declaration_list
+      (property_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (accessor_list
+          (accessor_declaration)
+          (accessor_declaration)))
+      (method_declaration
+        (predefined_type)
+        (identifier)
+        (parameter_list)
+        (block
+          (local_declaration_statement
+            (variable_declaration
+              (implicit_type)
+              (variable_declarator
+                (identifier)
+                (invocation_expression
+                  (identifier)
+                  (argument_list)))))
+          (expression_statement
+            (assignment_expression
+              (identifier)
+              (invocation_expression
+                (member_access_expression
+                  (identifier)
+                  (identifier))
+                (argument_list))))
+          (expression_statement
+            (assignment_expression
+              (member_access_expression
+                (identifier)
+                (identifier))
+              (member_access_expression
+                (identifier)
+                (identifier))))
+          (local_declaration_statement
+            (variable_declaration
+              (implicit_type)
+              (variable_declarator
+                (identifier)
+                (invocation_expression
+                  (identifier)
+                  (argument_list)))))
+          (expression_statement
+            (assignment_expression
+              (identifier)
+              (invocation_expression
+                (member_access_expression
+                  (identifier)
+                  (identifier))
+                (argument_list))))
+          (expression_statement
+            (assignment_expression
+              (member_access_expression
+                (identifier)
+                (identifier))
+              (member_access_expression
+                (identifier)
+                (identifier))))))
+      (method_declaration
+        (predefined_type)
+        (identifier)
+        (parameter_list)
+        (block)))))
