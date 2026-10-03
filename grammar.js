@@ -1490,6 +1490,18 @@ export default grammar({
       $.conditional_access_expression,
     ),
 
+    // Keep pointer indirection separate from the other lvalues so postfix
+    // increment and decrement cannot absorb an unparenthesized `*p` as in
+    // `(*p)++`; `*p++` must instead dereference the incremented pointer.
+    _postfix_incrementable_expression: $ => choice(
+      $.this,
+      $.member_access_expression,
+      $.tuple_expression,
+      $._simple_name,
+      $.element_access_expression,
+      alias($._parenthesized_lvalue_expression, $.parenthesized_expression),
+    ),
+
     // Covers error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
     _expression_statement_expression: $ => choice(
       $.assignment_expression,
@@ -1559,26 +1571,46 @@ export default grammar({
       )),
     ),
 
-    postfix_unary_expression: $ => prec(PREC.POSTFIX, seq(
-      $.expression,
-      choice('++', '--', '!'),
+    postfix_unary_expression: $ => prec(PREC.POSTFIX, choice(
+      seq($._postfix_incrementable_expression, choice('++', '--')),
+      seq($.expression, '!'),
     )),
 
     prefix_unary_expression: $ => prec(PREC.UNARY, seq(
       // `&` and `*` are intentionally NOT in this choice list:
       //   * `&` → `_address_of_expression` (operand restricted to lvalue
       //           — see comment on that rule for the #413 rationale)
-      //   * `*` → `_pointer_indirection_expression` (same shape,
-      //           restricted to lvalue, surfaced in `lvalue_expression`)
+      //   * `*` → `_pointer_indirection_expression` (its result is surfaced
+      //           in `lvalue_expression` for assignment targets)
       // Both are aliased back to `prefix_unary_expression` so the
       // public AST is unaffected.
       choice('++', '--', '+', '-', '!', '~', '^'),
       $.expression,
     )),
 
+    // C# pointer indirection takes a unary expression. Its result remains an
+    // lvalue, while its operand can be a postfix expression or pointer cast.
     _pointer_indirection_expression: $ => prec.right(PREC.UNARY, seq(
       '*',
-      $.lvalue_expression,
+      choice(
+        $.lvalue_expression,
+        $.postfix_unary_expression,
+        $.parenthesized_expression,
+        $.invocation_expression,
+        alias($._pointer_indirection_cast_expression, $.cast_expression),
+      ),
+    )),
+
+    _pointer_indirection_cast_expression: $ => prec(PREC.UNARY, seq(
+      '(',
+      field('type', $.type),
+      ')',
+      field('value', choice(
+        $.lvalue_expression,
+        $.postfix_unary_expression,
+        $.parenthesized_expression,
+        alias($._address_of_expression, $.prefix_unary_expression),
+      )),
     )),
 
     // Address-of is split out from `prefix_unary_expression` so that
