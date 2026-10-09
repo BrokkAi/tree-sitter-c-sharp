@@ -1,0 +1,153 @@
+================================================================================
+Postfix increment accepts calls, ref conditionals, null-forgiving values, and pointers
+================================================================================
+
+unsafe class PostfixOperands {
+    static int value;
+    static ref int F() => ref value;
+    ref int M() => ref value;
+
+    static void Cases(PostfixOperands obj, int[] arr, int i, byte* pointer,
+        bool condition, ref int left, ref int right) {
+        F()++;
+        obj.M()++;
+        arr[i]++;
+        (condition ? ref left : ref right)++;
+        left!++;
+        (left!)++;
+        *pointer++ = 1;
+    }
+}
+
+struct Counter {
+    public static Counter operator ++(Counter value) => value;
+    public void IncrementThis() { this++; }
+}
+
+--------------------------------------------------------------------------------
+
+(compilation_unit
+  (class_declaration
+    (modifier)
+    (identifier)
+    (declaration_list
+      (field_declaration
+        (modifier)
+        (variable_declaration
+          (predefined_type)
+          (variable_declarator
+            (identifier))))
+      (method_declaration
+        (modifier)
+        (ref_type
+          (predefined_type))
+        (identifier)
+        (parameter_list)
+        (arrow_expression_clause
+          (ref_expression
+            (identifier))))
+      (method_declaration
+        (ref_type
+          (predefined_type))
+        (identifier)
+        (parameter_list)
+        (arrow_expression_clause
+          (ref_expression
+            (identifier))))
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (identifier))
+          (parameter
+            (array_type
+              (predefined_type)
+              (array_rank_specifier))
+            (identifier))
+          (parameter
+            (predefined_type)
+            (identifier))
+          (parameter
+            (pointer_type
+              (predefined_type))
+            (identifier))
+          (parameter
+            (predefined_type)
+            (identifier))
+          (parameter
+            (modifier)
+            (predefined_type)
+            (identifier))
+          (parameter
+            (modifier)
+            (predefined_type)
+            (identifier)))
+        (block
+          (expression_statement
+            (postfix_unary_expression
+              (invocation_expression
+                (identifier)
+                (argument_list))))
+          (expression_statement
+            (postfix_unary_expression
+              (invocation_expression
+                (member_access_expression
+                  (identifier)
+                  (identifier))
+                (argument_list))))
+          (expression_statement
+            (postfix_unary_expression
+              (element_access_expression
+                (identifier)
+                (bracketed_argument_list
+                  (argument
+                    (identifier))))))
+          (expression_statement
+            (postfix_unary_expression
+              (parenthesized_expression
+                (conditional_expression
+                  (identifier)
+                  (ref_expression
+                    (identifier))
+                  (ref_expression
+                    (identifier))))))
+          (expression_statement
+            (postfix_unary_expression
+              (postfix_unary_expression
+                (identifier))))
+          (expression_statement
+            (postfix_unary_expression
+              (parenthesized_expression
+                (postfix_unary_expression
+                  (identifier)))))
+          (expression_statement
+            (assignment_expression
+              (prefix_unary_expression
+                (postfix_unary_expression
+                  (identifier)))
+              (integer_literal)))))))
+  (struct_declaration
+    (identifier)
+    (declaration_list
+      (operator_declaration
+        (modifier)
+        (modifier)
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (identifier)))
+        (arrow_expression_clause
+          (identifier)))
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list)
+        (block
+          (expression_statement
+            (postfix_unary_expression
+              (this))))))))

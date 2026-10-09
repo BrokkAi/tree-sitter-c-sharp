@@ -1,0 +1,108 @@
+================================================================================
+Unsafe pointer indirection with postfix increment and pointer casts
+================================================================================
+
+unsafe class X {
+    static void Set(byte* p, byte value) { *p++ = value; }
+    static float Bits(uint value) { return *((float*)&value); }
+    static void W(byte* p, ulong value) { *(ulong*)p = value; }
+    static float* Address(uint value) { return (float*)&value; }
+    static int Multiply(int left, int right) { return left * right; }
+}
+
+--------------------------------------------------------------------------------
+
+(compilation_unit
+  (class_declaration
+    (modifier)
+    (identifier)
+    (declaration_list
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list
+          (parameter
+            (pointer_type
+              (predefined_type))
+            (identifier))
+          (parameter
+            (predefined_type)
+            (identifier)))
+        (block
+          (expression_statement
+            (assignment_expression
+              (prefix_unary_expression
+                (postfix_unary_expression
+                  (identifier)))
+              (identifier)))))
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list
+          (parameter
+            (predefined_type)
+            (identifier)))
+        (block
+          (return_statement
+            (prefix_unary_expression
+              (parenthesized_expression
+                (cast_expression
+                  (pointer_type
+                    (predefined_type))
+                  (prefix_unary_expression
+                    (identifier))))))))
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list
+          (parameter
+            (pointer_type
+              (predefined_type))
+            (identifier))
+          (parameter
+            (predefined_type)
+            (identifier)))
+        (block
+          (expression_statement
+            (assignment_expression
+              (prefix_unary_expression
+                (cast_expression
+                  (pointer_type
+                    (predefined_type))
+                  (identifier)))
+              (identifier)))))
+      (method_declaration
+        (modifier)
+        (pointer_type
+          (predefined_type))
+        (identifier)
+        (parameter_list
+          (parameter
+            (predefined_type)
+            (identifier)))
+        (block
+          (return_statement
+            (cast_expression
+              (pointer_type
+                (predefined_type))
+              (prefix_unary_expression
+                (identifier))))))
+      (method_declaration
+        (modifier)
+        (predefined_type)
+        (identifier)
+        (parameter_list
+          (parameter
+            (predefined_type)
+            (identifier))
+          (parameter
+            (predefined_type)
+            (identifier)))
+        (block
+          (return_statement
+            (binary_expression
+              (identifier)
+              (identifier))))))))
