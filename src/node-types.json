@@ -4710,6 +4710,10 @@
           "named": true
         },
         {
+          "type": "invocation_expression",
+          "named": true
+        },
+        {
           "type": "member_access_expression",
           "named": true
         },
@@ -4718,11 +4722,11 @@
           "named": true
         },
         {
-          "type": "this",
+          "type": "postfix_unary_expression",
           "named": true
         },
         {
-          "type": "tuple_expression",
+          "type": "this",
           "named": true
         }
       ]

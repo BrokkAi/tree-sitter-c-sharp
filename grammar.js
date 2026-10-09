@@ -1496,9 +1496,14 @@ export default grammar({
     _postfix_incrementable_expression: $ => choice(
       $.this,
       $.member_access_expression,
-      $.tuple_expression,
       $._simple_name,
       $.element_access_expression,
+      // Calls can return refs, and the parser cannot know their return category.
+      $.invocation_expression,
+      // This includes the null-forgiving postfix form, which preserves variable-ness.
+      $.postfix_unary_expression,
+      // Needed for a parenthesized ref conditional, which denotes a variable.
+      $.parenthesized_expression,
       alias($._parenthesized_lvalue_expression, $.parenthesized_expression),
     ),
 
