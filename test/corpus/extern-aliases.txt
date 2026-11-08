@@ -1,0 +1,183 @@
+==================
+Compilation unit aliases
+==================
+extern alias X;
+using Y = X::A;
+class C { X::A.B x; global::A.B g; extern int f; }
+
+---
+
+(compilation_unit
+  (extern_alias_directive
+    name: (identifier))
+  (using_directive
+    name: (identifier)
+    (alias_qualified_name
+      alias: (identifier)
+      name: (identifier)))
+  (class_declaration
+    name: (identifier)
+    body: (declaration_list
+      (field_declaration
+        (variable_declaration
+          type: (qualified_name
+            qualifier: (alias_qualified_name
+              alias: (identifier)
+              name: (identifier))
+            name: (identifier))
+          (variable_declarator
+            name: (identifier))))
+      (field_declaration
+        (variable_declaration
+          type: (qualified_name
+            qualifier: (alias_qualified_name
+              alias: (identifier)
+              name: (identifier))
+            name: (identifier))
+          (variable_declarator
+            name: (identifier))))
+      (field_declaration
+        (modifier)
+        (variable_declaration
+          type: (predefined_type)
+          (variable_declarator
+            name: (identifier)))))))
+
+==================
+Block namespace aliases
+==================
+namespace N {
+extern alias X;
+using Y = X::A;
+class C { X::A.B x; global::A.B g; extern int f; }
+}
+
+---
+
+(compilation_unit
+  (namespace_declaration
+    name: (identifier)
+    body: (declaration_list
+      (extern_alias_directive
+        name: (identifier))
+      (using_directive
+        name: (identifier)
+        (alias_qualified_name
+          alias: (identifier)
+          name: (identifier)))
+      (class_declaration
+        name: (identifier)
+        body: (declaration_list
+          (field_declaration
+            (variable_declaration
+              type: (qualified_name
+                qualifier: (alias_qualified_name
+                  alias: (identifier)
+                  name: (identifier))
+                name: (identifier))
+              (variable_declarator
+                name: (identifier))))
+          (field_declaration
+            (variable_declaration
+              type: (qualified_name
+                qualifier: (alias_qualified_name
+                  alias: (identifier)
+                  name: (identifier))
+                name: (identifier))
+              (variable_declarator
+                name: (identifier))))
+          (field_declaration
+            (modifier)
+            (variable_declaration
+              type: (predefined_type)
+              (variable_declarator
+                name: (identifier)))))))))
+
+==================
+File scoped namespace aliases
+==================
+namespace N;
+extern alias X;
+using Y = X::A;
+class C { X::A.B x; global::A.B g; extern int f; }
+
+---
+
+(compilation_unit
+  (file_scoped_namespace_declaration
+    name: (identifier))
+  (extern_alias_directive
+    name: (identifier))
+  (using_directive
+    name: (identifier)
+    (alias_qualified_name
+      alias: (identifier)
+      name: (identifier)))
+  (class_declaration
+    name: (identifier)
+    body: (declaration_list
+      (field_declaration
+        (variable_declaration
+          type: (qualified_name
+            qualifier: (alias_qualified_name
+              alias: (identifier)
+              name: (identifier))
+            name: (identifier))
+          (variable_declarator
+            name: (identifier))))
+      (field_declaration
+        (variable_declaration
+          type: (qualified_name
+            qualifier: (alias_qualified_name
+              alias: (identifier)
+              name: (identifier))
+            name: (identifier))
+          (variable_declarator
+            name: (identifier))))
+      (field_declaration
+        (modifier)
+        (variable_declaration
+          type: (predefined_type)
+          (variable_declarator
+            name: (identifier)))))))
+
+==================
+Conditional namespace aliases
+==================
+namespace N {
+#if ONE
+extern alias X;
+#elif TWO
+extern alias Y;
+#else
+extern alias Z;
+#endif
+using Y = X::A;
+class C {}
+}
+
+---
+
+(compilation_unit
+  (namespace_declaration
+    name: (identifier)
+    body: (declaration_list
+      (preproc_if
+        condition: (identifier)
+        (extern_alias_directive
+          name: (identifier))
+        alternative: (preproc_elif
+          condition: (identifier)
+          (extern_alias_directive
+            name: (identifier))
+          alternative: (preproc_else
+            (extern_alias_directive
+              name: (identifier)))))
+      (using_directive
+        name: (identifier)
+        (alias_qualified_name
+          alias: (identifier)
+          name: (identifier)))
+      (class_declaration
+        name: (identifier)
+        body: (declaration_list)))))

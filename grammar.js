@@ -272,8 +272,21 @@ export default grammar({
     namespace_declaration: $ => seq(
       'namespace',
       field('name', $._name),
-      field('body', $.declaration_list),
+      field('body', alias($._namespace_declaration_list, $.declaration_list)),
       $._optional_semi,
+    ),
+
+    _namespace_declaration_list: $ => seq(
+      '{',
+      repeat($._namespace_body_item),
+      '}',
+    ),
+
+    _namespace_body_item: $ => choice(
+      $.extern_alias_directive,
+      $.using_directive,
+      $._namespace_member_declaration,
+      alias($.preproc_if_in_namespace, $.preproc_if),
     ),
 
     file_scoped_namespace_declaration: $ => seq(
@@ -2225,6 +2238,7 @@ export default grammar({
     // Preprocessor
 
     ...preprocIf('', $ => $.declaration),
+    ...preprocIf('_in_namespace', $ => $._namespace_body_item),
     ...preprocIf('_in_top_level', $ => choice($._top_level_item_no_statement, $.statement)),
     ...preprocIf('_in_expression', $ => $.expression, -2, false),
     ...preprocIf('_in_enum_member_declaration', $ => $.enum_member_declaration, 0, false),
