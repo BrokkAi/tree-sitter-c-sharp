@@ -1,13 +1,22 @@
 name: Lint
 
 on:
+  workflow_dispatch:
   push:
     branches: [master]
     paths:
       - grammar.js
+      - .github/workflows/lint.yml
+      - eslint.config.mjs
+      - package.json
+      - package-lock.json
   pull_request:
     paths:
       - grammar.js
+      - .github/workflows/lint.yml
+      - eslint.config.mjs
+      - package.json
+      - package-lock.json
 
 jobs:
   lint:
@@ -21,6 +30,6 @@ jobs:
           cache: npm
           node-version: ${{vars.NODE_VERSION}}
       - name: Install modules
-        run: npm ci --legacy-peer-deps
+        run: npm ci --legacy-peer-deps --ignore-scripts
       - name: Run ESLint
         run: npm run lint
